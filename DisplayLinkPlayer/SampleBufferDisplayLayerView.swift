@@ -65,7 +65,7 @@ class SampleBufferDisplayLayerView: UIView, AVPlayerItemOutputPullDelegate {
     private var lastTimestamp: CFTimeInterval = 0
     //MARK: CADisplayLink
     @objc func displayLinkCallback(displayLink: CADisplayLink) {
-        let nextOutputHostTime = displayLink.timestamp + displayLink.duration
+        let nextOutputHostTime = displayLink.timestamp + displayLink.duration * CFTimeInterval(displayLink.frameInterval)
         let nextOutputItemTime = playerItemVideoOutput.itemTimeForHostTime(nextOutputHostTime)
         if playerItemVideoOutput.hasNewPixelBufferForItemTime(nextOutputItemTime) {
             lastTimestamp = displayLink.timestamp
